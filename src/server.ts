@@ -3,8 +3,9 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./schema";
 import { createServer } from "http";
-import express from "express";
-import logger from "morgan";
+import * as express from "express";
+import * as logger from "morgan";
+import client from "./client";
 
 const startServer = async () => {
 	const app = express();
@@ -13,6 +14,11 @@ const startServer = async () => {
 	const httpServer = createServer(app);
 	const apolloServer = new ApolloServer({
 		schema,
+		context: async ({ req }) => {
+			if (req) {
+				return { client };
+			}
+		},
 	});
 	await apolloServer.start();
 	apolloServer.applyMiddleware({ app });
