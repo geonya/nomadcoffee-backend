@@ -12,8 +12,12 @@ export type Resolver = (
 	info: any
 ) => any;
 
-export type Resolvers = {
-	[key: string]: {
-		[key: string]: Resolver;
-	};
-};
+type PartialRecord<K extends string, T> = { [P in K]?: T };
+
+type ResolverOperationType = "Query" | "Mutation" | "Subscription";
+
+export interface IResolver {
+	[key: string]: Resolver;
+}
+
+export type Resolvers = PartialRecord<ResolverOperationType, IResolver>;
