@@ -7,6 +7,6 @@ export default gql`
 	type SearchUserResult {
 		ok: Boolean!
 		error: String
-		users: [User]
+		totalPages: Int
 	}
 `;

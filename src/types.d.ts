@@ -14,7 +14,15 @@ export type Resolver = (
 
 type PartialRecord<K extends string, T> = { [P in K]?: T };
 
-type ResolverOperationType = "Query" | "Mutation" | "Subscription";
+type ResolverOperationType =
+	| "Query"
+	| "Mutation"
+	| "Subscription"
+	| "Upload"
+	| "CoffeeShop"
+	| "Category"
+	| "CoffeeShopPhoto"
+	| "User";
 
 export interface IResolver {
 	[key: string]: Resolver;

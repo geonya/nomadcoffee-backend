@@ -62,7 +62,7 @@ export const resolver: Resolvers = {
 			}
 			return {
 				ok: true,
-				users,
+				totalPages: Math.ceil(users.length / USERS_PER_PAGE),
 			};
 		}),
 	},

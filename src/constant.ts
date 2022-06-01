@@ -1,1 +1,2 @@
 export const USERS_PER_PAGE = 10;
+export const SHOPS_PER_PAGE = 10;

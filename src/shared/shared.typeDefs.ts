@@ -5,4 +5,8 @@ export default gql`
 		ok: Boolean!
 		error: String
 	}
+	input CategoryInput {
+		name: String!
+		slug: String!
+	}
 `;

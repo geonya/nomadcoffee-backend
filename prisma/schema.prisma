@@ -11,16 +11,51 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique
-  email          String   @unique
+  id             Int               @id @default(autoincrement())
+  username       String            @unique
+  email          String            @unique
   name           String
   password       String
   location       String?
   avatarUrl      String?
   githubUsername String?
-  followers      User[]   @relation("FollowRelation", references: [id])
-  following      User[]   @relation("FollowRelation", references: [id])
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  followers      User[]            @relation("FollowRelation", references: [id])
+  following      User[]            @relation("FollowRelation", references: [id])
+  shops          CoffeeShop[]
+  photos         CoffeeShopPhoto[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model Category {
+  id        Int          @id @default(autoincrement())
+  name      String       @unique
+  slug      String
+  shops     CoffeeShop[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model CoffeeShop {
+  id         Int               @id @default(autoincrement())
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name       String
+  userId     Int
+  categories Category[]
+  photos     CoffeeShopPhoto[]
+  latitude   String
+  longitude  String
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+}
+
+model CoffeeShopPhoto {
+  id           Int        @id @default(autoincrement())
+  url          String
+  shop         CoffeeShop @relation(fields: [coffeeShopId], references: [id], onDelete: Cascade)
+  coffeeShopId Int
+  user         User       @relation(fields: [userId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  userId       Int
 }
