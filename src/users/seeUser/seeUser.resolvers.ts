@@ -5,11 +5,7 @@ import { protectedResolver } from "../users.utils";
 const resolvers: Resolvers = {
 	Query: {
 		seeUser: protectedResolver(async (_, { username, page }, { client }) => {
-			if (page < 1)
-				return {
-					ok: false,
-					error: "page number must be more than 1",
-				};
+			if (page < 1) return null;
 			const foundUser = await client.user.findUnique({
 				where: { username },
 				include: {
@@ -23,11 +19,7 @@ const resolvers: Resolvers = {
 					},
 				},
 			});
-			if (!foundUser?.id)
-				return {
-					ok: false,
-					error: "user not found",
-				};
+			if (!foundUser?.id) return null;
 			return foundUser;
 		}),
 	},
