@@ -1,6 +1,6 @@
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../users.utils";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { uploadToS3Bucket } from "../../shared/shared.utils";
 
 const resolvers: Resolvers = {

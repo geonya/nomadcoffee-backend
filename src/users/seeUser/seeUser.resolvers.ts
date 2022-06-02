@@ -23,7 +23,7 @@ const resolvers: Resolvers = {
 					},
 				},
 			});
-			if (!foundUser.id)
+			if (!foundUser?.id)
 				return {
 					ok: false,
 					error: "user not found",

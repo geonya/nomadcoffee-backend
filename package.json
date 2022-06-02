@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev": "nodemon --exec ts-node src/server --ext ts,js --delay2",
 		"migrate": "npx prisma migrate dev --preview-feature",
-		"studio": "npx prisma studio"
+		"studio": "npx prisma studio",
+		"build": "npx tsc",
+		"start": "node build/server"
 	},
 	"repository": {
 		"type": "git",

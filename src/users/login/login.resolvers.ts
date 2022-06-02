@@ -1,6 +1,6 @@
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Resolvers } from "../../types";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 const resolvers: Resolvers = {
 	Mutation: {
@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
 					ok: false,
 					error: "password wrong!",
 				};
-			const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+			const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY!);
 			return {
 				ok: true,
 				token,

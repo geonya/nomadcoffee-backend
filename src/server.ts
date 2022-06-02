@@ -4,8 +4,8 @@ import { graphqlUploadExpress } from "graphql-upload";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./schema";
 import { createServer } from "http";
-import * as express from "express";
-import * as logger from "morgan";
+import express from "express";
+import logger from "morgan";
 import client from "./client";
 import { getUser } from "./users/users.utils";
 
@@ -20,7 +20,10 @@ const startServer = async () => {
 		schema,
 		context: async ({ req }) => {
 			if (req) {
-				return { loggedInUser: await getUser(req.headers.token), client };
+				return {
+					loggedInUser: await getUser(req.headers.token as string),
+					client,
+				};
 			}
 		},
 	});
