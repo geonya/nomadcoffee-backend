@@ -8,6 +8,7 @@ import express from "express";
 import logger from "morgan";
 import client from "./client";
 import { getUser } from "./users/users.utils";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 const startServer = async () => {
 	const app = express();
@@ -18,6 +19,7 @@ const startServer = async () => {
 	const httpServer = createServer(app);
 	const apolloServer = new ApolloServer({
 		schema,
+		introspection: true,
 		context: async ({ req }) => {
 			if (req) {
 				return {
@@ -26,6 +28,7 @@ const startServer = async () => {
 				};
 			}
 		},
+		plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 	});
 	await apolloServer.start();
 	apolloServer.applyMiddleware({ app });
