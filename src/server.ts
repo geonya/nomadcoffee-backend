@@ -28,7 +28,7 @@ const startServer = async () => {
 				};
 			}
 		},
-		plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+		// plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 	});
 	await apolloServer.start();
 	apolloServer.applyMiddleware({ app });
