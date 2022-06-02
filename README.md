@@ -17,6 +17,7 @@
   - submit : https://github.com/geonya/nomadcoffee-backend/commit/b612a95e08b1177624a542bd6945a9feebc0dc19
 
 - [x] Day 9 :
+
   - [x] Create a Category model with a relationshops to CoffeeShop
   - [x] Create a CoffeeShop model with a relationship to the User that created the CoffeeShop and relationships to Category
   - [x] Create a CoffeeShopPhoto model with a relationship to the CoffeeShop
@@ -27,3 +28,6 @@
   - [x] seeCategory should list all the CoffeeShop inside of a Category with pagination.
   - [x] seeCategories should list all the Category and should have a totalShops computed field that counts all the CoffeeShop inside of the Category, it should also have pagination
   - [x] editCoffeeShop should edit a CoffeeShop
+
+- [ ] Day 11 :
+  - [ ] Deploy Server in Heroku app
