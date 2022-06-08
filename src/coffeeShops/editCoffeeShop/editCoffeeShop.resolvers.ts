@@ -50,11 +50,11 @@ export const resolvers: Resolvers = {
 					return {
 						ok: true,
 					};
-				} catch (err) {
-					console.error(err);
+				} catch (error) {
+					console.error(error);
 					return {
 						ok: false,
-						error: "can't edit shop data",
+						error,
 					};
 				}
 			}
