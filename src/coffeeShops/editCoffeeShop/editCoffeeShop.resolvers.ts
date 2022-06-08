@@ -27,12 +27,15 @@ export const resolvers: Resolvers = {
 							});
 						}
 					}
-					const categoriesObjs = categories.map(
-						(category: { name: string; slug: string }) => ({
-							where: { name: category.name },
-							create: { name: category.name, slug: category.slug },
-						})
-					);
+					let categoriesObjs = null;
+					if (categories) {
+						categoriesObjs = categories.map(
+							(category: { name: string; slug: string }) => ({
+								where: { name: category.name },
+								create: { name: category.name, slug: category.slug },
+							})
+						);
+					}
 					await client.coffeeShop.update({
 						where: {
 							id,
