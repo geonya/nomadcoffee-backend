@@ -45,7 +45,7 @@ export const resolvers: Resolvers = {
 							description,
 							latitude,
 							longitude,
-							...(categories.length > 0 && {
+							...(categories && {
 								categories: { connectOrCreate: categoriesObjs },
 							}),
 						},
@@ -57,7 +57,7 @@ export const resolvers: Resolvers = {
 					console.error(error);
 					return {
 						ok: false,
-						error,
+						error: "Can't Edit Data",
 					};
 				}
 			}
