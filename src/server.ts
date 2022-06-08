@@ -1,20 +1,20 @@
-require("dotenv").config();
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { graphqlUploadExpress } from "graphql-upload";
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs, resolvers } from "./schema";
-import { createServer } from "http";
-import express from "express";
-import logger from "morgan";
-import client from "./client";
-import { getUser } from "./users/users.utils";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+require('dotenv').config();
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { graphqlUploadExpress } from 'graphql-upload';
+import { ApolloServer } from 'apollo-server-express';
+import { typeDefs, resolvers } from './schema';
+import { createServer } from 'http';
+import express from 'express';
+import logger from 'morgan';
+import client from './client';
+import { getUser } from './users/users.utils';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 const startServer = async () => {
 	const app = express();
-	app.use(logger("dev"));
+	app.use(logger('dev'));
 	app.use(graphqlUploadExpress());
-	app.use("/static", express.static("uploads"));
+	app.use('/static', express.static('uploads'));
 	const schema = makeExecutableSchema({ typeDefs, resolvers });
 	const httpServer = createServer(app);
 	const apolloServer = new ApolloServer({
@@ -27,8 +27,6 @@ const startServer = async () => {
 				};
 			}
 		},
-		introspection: true,
-		plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 	});
 	await apolloServer.start();
 	apolloServer.applyMiddleware({ app });

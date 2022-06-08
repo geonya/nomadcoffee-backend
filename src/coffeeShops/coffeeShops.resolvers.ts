@@ -1,7 +1,9 @@
-import { Resolvers } from "../types";
+import { Resolvers } from '../types';
 
 export const resolvers: Resolvers = {
 	CoffeeShop: {
+		user: ({ userId }, _: any, { client }) =>
+			client.user.findUnique({ where: { id: userId } }),
 		photos: ({ id }, _, { client }) =>
 			client.coffeeShopPhoto.findMany({ where: { coffeeShopId: id } }),
 	},
