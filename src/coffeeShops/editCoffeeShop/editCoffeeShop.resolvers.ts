@@ -11,6 +11,11 @@ export const resolvers: Resolvers = {
 				{ client, loggedInUser }
 			) => {
 				try {
+					if (files?.length > 10)
+						return {
+							ok: false,
+							error: "Can't not upload files more than 10",
+						};
 					if (files?.length > 0) {
 						for (let i = 0; i < files.length; i++) {
 							const url = await uploadToS3Bucket(
