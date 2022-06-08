@@ -8,7 +8,6 @@ import express from 'express';
 import logger from 'morgan';
 import client from './client';
 import { getUser } from './users/users.utils';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 const startServer = async () => {
 	const app = express();

@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 export default gql`
 	type Mutation {
@@ -8,6 +8,7 @@ export default gql`
 			files: [Upload]
 			latitude: String
 			longitude: String
+			description: String
 			categories: [CategoryInput]
 		): MutationResponse
 	}

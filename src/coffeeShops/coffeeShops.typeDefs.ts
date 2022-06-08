@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 export default gql`
 	type CoffeeShop {
@@ -6,6 +6,7 @@ export default gql`
 		name: String!
 		latitude: String
 		longitude: String
+		description: String
 		user: User!
 		photos: [CoffeeShopPhoto]
 		categories: [Category]

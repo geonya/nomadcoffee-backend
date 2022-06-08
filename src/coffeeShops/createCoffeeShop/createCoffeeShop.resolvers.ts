@@ -1,13 +1,13 @@
-import { uploadToS3Bucket } from "../../shared/shared.utils";
-import { Resolvers } from "../../types";
-import { protectedResolver } from "../../users/users.utils";
+import { uploadToS3Bucket } from '../../shared/shared.utils';
+import { Resolvers } from '../../types';
+import { protectedResolver } from '../../users/users.utils';
 
 export const resolvers: Resolvers = {
 	Mutation: {
 		createCoffeeShop: protectedResolver(
 			async (
 				_,
-				{ name, files, latitude, longitude, categories },
+				{ name, files, latitude, longitude, categories, description },
 				{ loggedInUser, client }
 			) => {
 				try {
@@ -25,6 +25,7 @@ export const resolvers: Resolvers = {
 									id: loggedInUser.id,
 								},
 							},
+							description,
 							longitude,
 							latitude,
 							...(categories.length > 0 && {
@@ -42,7 +43,7 @@ export const resolvers: Resolvers = {
 							const url = await uploadToS3Bucket(
 								files[i],
 								loggedInUser.id,
-								"photos"
+								'photos'
 							);
 							await client.coffeeShopPhoto.create({
 								data: {
