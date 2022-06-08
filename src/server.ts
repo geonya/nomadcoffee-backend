@@ -19,6 +19,7 @@ const startServer = async () => {
 	const httpServer = createServer(app);
 	const apolloServer = new ApolloServer({
 		schema,
+		introspection: true,
 		context: async ({ req }) => {
 			if (req) {
 				return {
