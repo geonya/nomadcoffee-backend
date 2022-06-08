@@ -6,6 +6,12 @@ export const resolvers: Resolvers = {
 			client.user.findUnique({ where: { id: userId } }),
 		photos: ({ id }, _, { client }) =>
 			client.coffeeShopPhoto.findMany({ where: { coffeeShopId: id } }),
+		categories: ({ id }, _, { client }) =>
+			client.category.findMany({
+				where: {
+					shops: { some: { id } },
+				},
+			}),
 	},
 	Category: {
 		totalShops: ({ id }, _, { client }) =>

@@ -28,7 +28,7 @@ export const resolvers: Resolvers = {
 							description,
 							longitude,
 							latitude,
-							...(categories.length > 0 && {
+							...(categories && {
 								categories: { connectOrCreate: categoriesObjs },
 							}),
 						},
