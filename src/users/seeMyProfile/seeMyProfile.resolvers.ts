@@ -1,11 +1,10 @@
-import { Resolvers } from "../../types";
-import { protectedResolver } from "../users.utils";
+import { Resolvers } from '../../types';
+import { protectedResolver } from '../users.utils';
 
-const resolvers: Resolvers = {
+export const resolvers: Resolvers = {
 	Query: {
 		seeMyProfile: protectedResolver(async (_, __, { loggedInUser, client }) =>
-			client.user.findUnique({ where: { username: loggedInUser.username } })
+			client.user.findUnique({ where: { id: loggedInUser.id } })
 		),
 	},
 };
-export default resolvers;
