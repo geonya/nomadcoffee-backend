@@ -1,6 +1,11 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+	type createCoffeeShopResult {
+		ok: Boolean!
+		error: String
+		result: CoffeeShop
+	}
 	scalar Upload
 	type Mutation {
 		createCoffeeShop(
@@ -10,6 +15,6 @@ export default gql`
 			longitude: String
 			description: String
 			categories: [CategoryInput]!
-		): MutationResponse
+		): createCoffeeShopResult
 	}
 `;

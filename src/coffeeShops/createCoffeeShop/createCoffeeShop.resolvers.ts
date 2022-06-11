@@ -38,6 +38,7 @@ export const resolvers: Resolvers = {
 							ok: false,
 							error: "Can't not upload files more than 10",
 						};
+					console.log(files.length);
 					if (files.length > 0) {
 						for (let i = 0; i < files.length; i++) {
 							const url = await uploadToS3Bucket(
@@ -56,6 +57,7 @@ export const resolvers: Resolvers = {
 					}
 					return {
 						ok: true,
+						result: coffeeShop,
 					};
 				} catch (err) {
 					console.error(err);
