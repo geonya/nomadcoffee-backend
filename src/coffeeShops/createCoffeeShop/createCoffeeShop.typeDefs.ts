@@ -15,6 +15,6 @@ export default gql`
 			longitude: String
 			description: String
 			categories: [CategoryInput]!
-		): createCoffeeShopResult
+		): createCoffeeShopResult!
 	}
 `;
