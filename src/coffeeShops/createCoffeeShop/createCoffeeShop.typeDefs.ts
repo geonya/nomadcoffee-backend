@@ -4,7 +4,7 @@ export default gql`
 	type createCoffeeShopResult {
 		ok: Boolean!
 		error: String
-		shop: CoffeeShop
+		coffeeShop: CoffeeShop
 	}
 	scalar Upload
 	type Mutation {

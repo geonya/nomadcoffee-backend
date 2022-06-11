@@ -18,9 +18,10 @@ export const resolvers: Resolvers = {
 						ok: false,
 						error: 'Not Authorized!',
 					};
-				await client.coffeeShop.delete({ where: { id } });
+				const coffeeShop = await client.coffeeShop.delete({ where: { id } });
 				return {
 					ok: true,
+					coffeeShop,
 				};
 			}
 		),
