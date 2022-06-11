@@ -41,7 +41,7 @@ export const resolvers: Resolvers = {
 							})
 						);
 					}
-					const coffeeShop = await client.coffeeShop.update({
+					await client.coffeeShop.update({
 						where: {
 							id,
 						},
@@ -57,7 +57,6 @@ export const resolvers: Resolvers = {
 					});
 					return {
 						ok: true,
-						coffeeShop,
 					};
 				} catch (error) {
 					console.error(error);
