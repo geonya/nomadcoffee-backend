@@ -57,7 +57,7 @@ export const resolvers: Resolvers = {
 					}
 					return {
 						ok: true,
-						result: coffeeShop,
+						shop: coffeeShop,
 					};
 				} catch (err) {
 					console.error(err);
