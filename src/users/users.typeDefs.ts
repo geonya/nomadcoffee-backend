@@ -11,9 +11,12 @@ export default gql`
 		avatarUrl: String
 		githubUsername: String
 		following: [User]
+		totalFollowing: Int!
 		followers: [User]
+		totalFollowers: Int!
 		shops: [CoffeeShop]
 		countShops: Int!
+		givenLikes: Int!
 		photos: [CoffeeShopPhoto]
 		createdAt: String!
 		updatedAt: String!
