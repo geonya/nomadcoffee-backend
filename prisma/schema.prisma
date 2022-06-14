@@ -25,6 +25,7 @@ model User {
   photos         CoffeeShopPhoto[]
   createdAt      DateTime          @default(now())
   updatedAt      DateTime          @updatedAt
+  likes          Like[]
 }
 
 model Category {
@@ -48,6 +49,7 @@ model CoffeeShop {
   longitude   String
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
+  likes       Like[]
 }
 
 model CoffeeShopPhoto {
@@ -59,4 +61,14 @@ model CoffeeShopPhoto {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   userId       Int
+}
+
+model Like {
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  coffeeShop   CoffeeShop @relation(fields: [coffeeShopId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  userId       Int
+  coffeeShopId Int
 }
