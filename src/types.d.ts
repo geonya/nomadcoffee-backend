@@ -1,4 +1,4 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User } from '@prisma/client';
 
 type Context = {
 	loggedInUser: User;
@@ -15,14 +15,14 @@ export type Resolver = (
 type PartialRecord<K extends string, T> = { [P in K]?: T };
 
 type ResolverOperationType =
-	| "Query"
-	| "Mutation"
-	| "Subscription"
-	| "Upload"
-	| "CoffeeShop"
-	| "Category"
-	| "CoffeeShopPhoto"
-	| "User";
+	| 'Query'
+	| 'Mutation'
+	| 'Subscription'
+	| 'Upload'
+	| 'Cafe'
+	| 'Category'
+	| 'CafePhoto'
+	| 'User';
 
 export interface IResolver {
 	[key: string]: Resolver;

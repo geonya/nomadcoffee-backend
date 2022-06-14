@@ -5,18 +5,18 @@ export const resolvers: Resolvers = {
 	Mutation: {
 		toggleLike: protectedResolver(
 			async (_, { id }, { client, loggedInUser }) => {
-				const existingCoffeShop = await client.coffeeShop.findUnique({
+				const existingCafe = await client.cafe.findUnique({
 					where: { id },
 				});
-				if (!existingCoffeShop) {
+				if (!existingCafe) {
 					return {
 						ok: false,
-						error: 'Not found coffeeShop',
+						error: 'Not found cafe',
 					};
 				}
 				const likeWhere = {
-					coffeeShopId_userId: {
-						coffeeShopId: id,
+					cafeId_userId: {
+						cafeId: id,
 						userId: loggedInUser.id,
 					},
 				};
@@ -33,7 +33,7 @@ export const resolvers: Resolvers = {
 									id: loggedInUser.id,
 								},
 							},
-							coffeeShop: {
+							cafe: {
 								connect: {
 									id,
 								},

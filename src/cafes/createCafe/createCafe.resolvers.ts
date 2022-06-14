@@ -4,7 +4,7 @@ import { protectedResolver } from '../../users/users.utils';
 
 export const resolvers: Resolvers = {
 	Mutation: {
-		createCoffeeShop: protectedResolver(
+		createCafe: protectedResolver(
 			async (
 				_,
 				{ name, files, latitude, longitude, categories, description },
@@ -17,7 +17,7 @@ export const resolvers: Resolvers = {
 							create: { name: category.name, slug: category.slug },
 						})
 					);
-					const coffeeShop = await client.coffeeShop.create({
+					const cafe = await client.cafe.create({
 						data: {
 							name,
 							user: {
@@ -46,9 +46,9 @@ export const resolvers: Resolvers = {
 								loggedInUser.id,
 								'photos'
 							);
-							await client.coffeeShopPhoto.create({
+							await client.cafePhoto.create({
 								data: {
-									coffeeShopId: coffeeShop.id,
+									cafeId: cafe.id,
 									userId: loggedInUser.id,
 									url,
 								},
@@ -57,13 +57,13 @@ export const resolvers: Resolvers = {
 					}
 					return {
 						ok: true,
-						coffeeShop,
+						cafe,
 					};
 				} catch (err) {
 					console.error(err);
 					return {
 						ok: false,
-						error: "can't create coffeshop",
+						error: "can't create cafe",
 					};
 				}
 			}

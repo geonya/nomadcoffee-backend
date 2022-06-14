@@ -11,66 +11,66 @@ datasource db {
 }
 
 model User {
-  id             Int               @id @default(autoincrement())
-  username       String            @unique
-  email          String            @unique
+  id             Int         @id @default(autoincrement())
+  username       String      @unique
+  email          String      @unique
   name           String
   password       String
   location       String?
   avatarUrl      String?
   githubUsername String?
-  followers      User[]            @relation("FollowRelation", references: [id])
-  following      User[]            @relation("FollowRelation", references: [id])
-  shops          CoffeeShop[]
-  photos         CoffeeShopPhoto[]
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  followers      User[]      @relation("FollowRelation", references: [id])
+  following      User[]      @relation("FollowRelation", references: [id])
+  cafes          Cafe[]
+  photos         CafePhoto[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
   likes          Like[]
 }
 
 model Category {
-  id        Int          @id @default(autoincrement())
-  name      String       @unique
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
   slug      String
-  shops     CoffeeShop[]
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  cafes     Cafe[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model CoffeeShop {
-  id          Int               @id @default(autoincrement())
-  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Cafe {
+  id          Int         @id @default(autoincrement())
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   name        String
   userId      Int
   categories  Category[]
-  photos      CoffeeShopPhoto[]
+  photos      CafePhoto[]
   description String?
   latitude    String
   longitude   String
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   likes       Like[]
 }
 
-model CoffeeShopPhoto {
-  id           Int        @id @default(autoincrement())
-  url          String
-  shop         CoffeeShop @relation(fields: [coffeeShopId], references: [id], onDelete: Cascade)
-  coffeeShopId Int
-  user         User       @relation(fields: [userId], references: [id])
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  userId       Int
+model CafePhoto {
+  id        Int      @id @default(autoincrement())
+  url       String
+  cafe      Cafe     @relation(fields: [cafeId], references: [id], onDelete: Cascade)
+  cafeId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
 }
 
 model Like {
-  id           Int        @id @default(autoincrement())
-  user         User       @relation(fields: [userId], references: [id])
-  coffeeShop   CoffeeShop @relation(fields: [coffeeShopId], references: [id])
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  userId       Int
-  coffeeShopId Int
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  cafe      Cafe     @relation(fields: [cafeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  cafeId    Int
 
-  @@unique([coffeeShopId, userId])
+  @@unique([cafeId, userId])
 }

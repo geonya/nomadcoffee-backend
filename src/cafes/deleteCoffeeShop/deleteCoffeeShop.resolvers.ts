@@ -3,22 +3,22 @@ import { protectedResolver } from '../../users/users.utils';
 
 export const resolvers: Resolvers = {
 	Mutation: {
-		deleteCoffeeShop: protectedResolver(
+		deleteCafe: protectedResolver(
 			async (_, { id }, { client, loggedInUser }) => {
-				const existingShop = await client.coffeeShop.findUnique({
+				const existingCafe = await client.cafe.findUnique({
 					where: { id },
 				});
-				if (!existingShop)
+				if (!existingCafe)
 					return {
 						ok: false,
-						error: 'Not found shop!',
+						error: 'Not found cafe!',
 					};
-				else if (existingShop.userId !== loggedInUser.id)
+				else if (existingCafe.userId !== loggedInUser.id)
 					return {
 						ok: false,
 						error: 'Not Authorized!',
 					};
-				await client.coffeeShop.delete({ where: { id } });
+				await client.cafe.delete({ where: { id } });
 				return {
 					ok: true,
 				};

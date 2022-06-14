@@ -29,5 +29,11 @@
   - [x] seeCategories should list all the Category and should have a totalShops computed field that counts all the CoffeeShop inside of the Category, it should also have pagination
   - [x] editCoffeeShop should edit a CoffeeShop
 
-- [ ] Day 11 :
-  - [ ] Deploy Server in Heroku app
+- [x] Day 11 :
+
+  - [x] Deploy Server in Heroku app
+
+- Keep Going
+  - [x] Like Model
+  - [ ] User Resolvers
+  - [ ] CoffeeShop => Cafe

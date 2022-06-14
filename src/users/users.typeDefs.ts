@@ -14,10 +14,10 @@ export default gql`
 		totalFollowing: Int!
 		followers: [User]
 		totalFollowers: Int!
-		shops: [CoffeeShop]
-		countShops: Int!
+		cafes: [Cafe]
+		countCafes: Int!
 		givenLikes: Int!
-		photos: [CoffeeShopPhoto]
+		photos: [CafePhoto]
 		createdAt: String!
 		updatedAt: String!
 	}

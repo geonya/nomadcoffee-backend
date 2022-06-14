@@ -4,7 +4,7 @@ import { protectedResolver } from '../../users/users.utils';
 
 export const resolvers: Resolvers = {
 	Mutation: {
-		editCoffeeShop: protectedResolver(
+		editCafe: protectedResolver(
 			async (
 				_,
 				{ id, name, files, latitude, longitude, categories, description },
@@ -23,9 +23,9 @@ export const resolvers: Resolvers = {
 								loggedInUser.id,
 								'photos'
 							);
-							await client.coffeeShopPhoto.create({
+							await client.cafePhoto.create({
 								data: {
-									coffeeShopId: id,
+									cafeId: id,
 									userId: loggedInUser.id,
 									url,
 								},
@@ -41,7 +41,7 @@ export const resolvers: Resolvers = {
 							})
 						);
 					}
-					await client.coffeeShop.update({
+					await client.cafe.update({
 						where: {
 							id,
 						},

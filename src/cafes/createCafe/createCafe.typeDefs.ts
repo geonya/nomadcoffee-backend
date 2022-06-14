@@ -1,20 +1,20 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-	type createCoffeeShopResult {
+	type createCafeResult {
 		ok: Boolean!
 		error: String
-		coffeeShop: CoffeeShop
+		cafe: Cafe
 	}
 	scalar Upload
 	type Mutation {
-		createCoffeeShop(
+		createCafe(
 			name: String!
 			files: [Upload]!
 			latitude: String
 			longitude: String
 			description: String
 			categories: [CategoryInput]!
-		): createCoffeeShopResult!
+		): createCafeResult!
 	}
 `;

@@ -3,8 +3,8 @@ import { protectedResolver } from '../../users/users.utils';
 
 export const resolvers: Resolvers = {
 	Query: {
-		seeCoffeeShop: protectedResolver(async (_, { id }, { client }) =>
-			client.coffeeShop.findUnique({ where: { id } })
+		seeCafe: protectedResolver(async (_, { id }, { client }) =>
+			client.cafe.findUnique({ where: { id } })
 		),
 	},
 };
