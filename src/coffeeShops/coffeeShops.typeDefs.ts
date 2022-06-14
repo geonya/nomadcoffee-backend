@@ -10,6 +10,7 @@ export default gql`
 		user: User!
 		photos: [CoffeeShopPhoto]
 		categories: [Category]
+		isLiked: Boolean!
 		countLikes: Int!
 		updatedAt: String!
 		createdAt: String!
