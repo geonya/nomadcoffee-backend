@@ -12,6 +12,8 @@ export const resolvers: Resolvers = {
 					shops: { some: { id } },
 				},
 			}),
+		countLikes: ({ id }, _, { client }) =>
+			client.like.count({ where: { coffeeShopId: id } }),
 	},
 	Category: {
 		totalShops: ({ id }, _, { client }) =>

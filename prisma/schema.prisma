@@ -71,4 +71,6 @@ model Like {
   updatedAt    DateTime   @updatedAt
   userId       Int
   coffeeShopId Int
+
+  @@unique([coffeeShopId, userId])
 }

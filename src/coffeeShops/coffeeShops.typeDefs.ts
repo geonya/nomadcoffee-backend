@@ -10,6 +10,9 @@ export default gql`
 		user: User!
 		photos: [CoffeeShopPhoto]
 		categories: [Category]
+		countLikes: Int!
+		updatedAt: String!
+		createdAt: String!
 	}
 	type CoffeeShopPhoto {
 		id: Int!
@@ -22,5 +25,13 @@ export default gql`
 		slug: String!
 		shops: [CoffeeShop]
 		totalShops: Int!
+		updatedAt: String!
+		createdAt: String!
+	}
+	type Like {
+		id: Int!
+		coffeeShop: CoffeeShop!
+		updatedAt: String!
+		createdAt: String!
 	}
 `;
