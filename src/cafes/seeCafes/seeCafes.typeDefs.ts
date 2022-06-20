@@ -2,6 +2,6 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
 	type Query {
-		seeCafes(page: Int!): [Cafe]
+		seeCafes(offset: Int!): [Cafe]
 	}
 `;
