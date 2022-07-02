@@ -11,15 +11,16 @@ export const resolvers: Resolvers = {
         { loggedInUser, client }
       ) => {
         try {
-          const categoriesObjs = categories.map(
-            ({ name }: { name: string }) => {
+          let categoriesObjs: { name: string; slug: string }[] | null = null;
+          if (categories) {
+            categoriesObjs = categories.map(({ name }: { name: string }) => {
               const slug = name.replace(/ /g, '-').toLowerCase();
               return {
                 where: { name },
                 create: { name, slug },
               };
-            }
-          );
+            });
+          }
           const cafe = await client.cafe.create({
             data: {
               name,
@@ -36,13 +37,14 @@ export const resolvers: Resolvers = {
               }),
             },
           });
-          if (files.length > 10)
+
+          if (files && files.length > 10)
             return {
               ok: false,
               error: "Can't not upload files more than 10",
             };
 
-          if (files.length > 0) {
+          if (files && files.length > 0) {
             for (let i = 0; i < files.length; i++) {
               const url = await uploadToS3Bucket(
                 files[i],
