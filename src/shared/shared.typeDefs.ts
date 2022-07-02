@@ -1,12 +1,11 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 export default gql`
-	type MutationResponse {
-		ok: Boolean!
-		error: String
-	}
-	input CategoryInput {
-		name: String!
-		slug: String!
-	}
+  type MutationResponse {
+    ok: Boolean!
+    error: String
+  }
+  input CategoryInput {
+    name: String!
+  }
 `;
