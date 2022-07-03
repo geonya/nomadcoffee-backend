@@ -53,8 +53,16 @@ export const resolvers: Resolvers = {
               );
               await client.cafePhoto.create({
                 data: {
-                  cafeId: cafe.id,
-                  userId: loggedInUser.id,
+                  cafe: {
+                    connect: {
+                      id: cafe.id,
+                    },
+                  },
+                  user: {
+                    connect: {
+                      id: loggedInUser.id,
+                    },
+                  },
                   url,
                 },
               });
