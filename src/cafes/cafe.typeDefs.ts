@@ -4,8 +4,7 @@ export default gql`
   type Cafe {
     id: Int!
     name: String!
-    latitude: String
-    longitude: String
+    address: String
     description: String
     user: User!
     photos: [CafePhoto]

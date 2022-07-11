@@ -11,8 +11,7 @@ export default gql`
     createCafe(
       name: String!
       files: [Upload]
-      latitude: String
-      longitude: String
+      address: String
       description: String
       categories: [CategoryInput]
     ): createCafeResult!

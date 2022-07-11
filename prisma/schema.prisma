@@ -24,8 +24,8 @@ model User {
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   likes          Like[]
-  followers User[]    @relation("FollowRelation")
-  following User[]    @relation("FollowRelation")
+  followers      User[]      @relation("FollowRelation")
+  following      User[]      @relation("FollowRelation")
 }
 
 model Category {
@@ -45,8 +45,7 @@ model Cafe {
   categories  Category[]
   photos      CafePhoto[]
   description String?
-  latitude    String?
-  longitude   String?
+  address     String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   likes       Like[]
