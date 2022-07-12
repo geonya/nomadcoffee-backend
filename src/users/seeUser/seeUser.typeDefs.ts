@@ -1,7 +1,11 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 export default gql`
-	type Query {
-		seeUser(username: String!, page: Int!): User
-	}
+  type SeeUserResult {
+    user: User
+    isMe: Boolean
+  }
+  type Query {
+    seeUser(username: String!): SeeUserResult
+  }
 `;
