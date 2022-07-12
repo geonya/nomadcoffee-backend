@@ -7,7 +7,7 @@ export const resolvers: Resolvers = {
     createCafe: protectedResolver(
       async (
         _,
-        { name, files, address, categories, description },
+        { name, files, address, categories, description, latitude, longitude },
         { loggedInUser, client }
       ) => {
         try {
@@ -31,6 +31,8 @@ export const resolvers: Resolvers = {
               },
               description,
               address,
+              latitude,
+              longitude,
               ...(categories && {
                 categories: { connectOrCreate: categoriesObjs },
               }),

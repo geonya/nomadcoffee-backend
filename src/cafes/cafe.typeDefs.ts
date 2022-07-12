@@ -5,6 +5,8 @@ export default gql`
     id: Int!
     name: String!
     address: String
+    latitude: Float
+    longitude: Float
     description: String
     user: User!
     photos: [CafePhoto]

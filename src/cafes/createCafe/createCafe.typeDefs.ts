@@ -12,6 +12,8 @@ export default gql`
       name: String!
       files: [Upload]
       address: String
+      latitude: Float
+      longitude: Float
       description: String
       categories: [CategoryInput]
     ): createCafeResult!

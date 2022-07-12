@@ -46,6 +46,8 @@ model Cafe {
   photos      CafePhoto[]
   description String?
   address     String?
+  latitude    Float?
+  longitude   Float?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   likes       Like[]
