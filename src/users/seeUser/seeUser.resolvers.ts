@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
         if (!foundUser?.id) return null;
         return {
           user: foundUser,
-          isMe: foundUser.id === loggedInUser.id,
+          isMe: foundUser.id === loggedInUser.id || false,
         };
       }
     ),
