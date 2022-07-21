@@ -10,6 +10,8 @@ export default gql`
     address: String
     avatarUrl: String
     githubUsername: String
+    isMe: Boolean
+    isFollowing: Boolean
     following: [User]
     totalFollowing: Int!
     followers: [User]

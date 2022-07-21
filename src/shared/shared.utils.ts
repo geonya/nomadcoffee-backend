@@ -12,11 +12,9 @@ export const uploadToS3Bucket = async (
   userId: number,
   folderName: string
 ) => {
-  console.log(file);
   const {
     file: { filename, createReadStream },
   } = await file;
-
   const readStream = createReadStream();
   const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
   const { Location } = await new AWS.S3()

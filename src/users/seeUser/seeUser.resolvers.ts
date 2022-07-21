@@ -19,10 +19,9 @@ const resolvers: Resolvers = {
           // 	},
           // },
         });
-        if (!foundUser?.id) return null;
+        if (!foundUser) return { user: null };
         return {
           user: foundUser,
-          isMe: foundUser.id === loggedInUser.id || false,
         };
       }
     ),
