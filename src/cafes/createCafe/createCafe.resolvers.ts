@@ -46,9 +46,9 @@ export const resolvers: Resolvers = {
             };
 
           if (files && files.length > 0) {
-            for (let i = 0; i < files.length; i++) {
+            for (const file of files) {
               const url = await uploadToS3Bucket(
-                files[i],
+                file,
                 loggedInUser.id,
                 'photos'
               );

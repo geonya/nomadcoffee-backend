@@ -7,19 +7,51 @@ export const resolvers: Resolvers = {
     editCafe: protectedResolver(
       async (
         _,
-        { id, name, files, address, categories, description },
+        {
+          id,
+          name,
+          files,
+          address,
+          categories,
+          description,
+          latitude,
+          longitude,
+          deleteIds,
+        },
         { client, loggedInUser }
       ) => {
         try {
+          const prevCafe = await client.cafe.findUnique({
+            where: { id },
+            select: { id: true, photos: true },
+          });
+          if (!prevCafe)
+            return {
+              ok: false,
+              error: 'Not found cafe',
+            };
+          for (const id of deleteIds) {
+            try {
+              await client.cafePhoto.delete({ where: { id } });
+              // TODO : AWS S3 버킷에서도 삭제
+            } catch (error) {
+              console.error(error);
+              return {
+                ok: false,
+                error: "Can't Delete Photo",
+              };
+            }
+          }
+          let categoriesObjs: { name: string; slug: string }[] | null = null;
           if (files?.length > 10)
             return {
               ok: false,
               error: "Can't not upload files more than 10",
             };
           if (files?.length > 0) {
-            for (let i = 0; i < files.length; i++) {
+            for (const file of files) {
               const url = await uploadToS3Bucket(
-                files[i],
+                file,
                 loggedInUser.id,
                 'photos'
               );
@@ -32,16 +64,16 @@ export const resolvers: Resolvers = {
               });
             }
           }
-          let categoriesObjs = null;
           if (categories) {
-            categoriesObjs = categories.map(
-              (category: { name: string; slug: string }) => ({
-                where: { name: category.name },
-                create: { name: category.name, slug: category.slug },
-              })
-            );
+            categoriesObjs = categories.map(({ name }: { name: string }) => {
+              const slug = name.replace(/ /g, '-').toLowerCase();
+              return {
+                where: { name },
+                create: { name, slug },
+              };
+            });
           }
-          await client.cafe.update({
+          const cafe = await client.cafe.update({
             where: {
               id,
             },
@@ -49,6 +81,8 @@ export const resolvers: Resolvers = {
               name,
               description,
               address,
+              latitude,
+              longitude,
               ...(categories && {
                 categories: { connectOrCreate: categoriesObjs },
               }),
@@ -56,6 +90,7 @@ export const resolvers: Resolvers = {
           });
           return {
             ok: true,
+            cafe,
           };
         } catch (error) {
           console.error(error);
