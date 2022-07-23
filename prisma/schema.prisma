@@ -26,6 +26,7 @@ model User {
   likes          Like[]
   followers      User[]      @relation("FollowRelation")
   following      User[]      @relation("FollowRelation")
+  comments       Comment[]
 }
 
 model Category {
@@ -51,6 +52,8 @@ model Cafe {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   likes       Like[]
+  comments    Comment[]
+  totalRating Float?
 }
 
 model CafePhoto {
@@ -58,7 +61,7 @@ model CafePhoto {
   url       String
   cafe      Cafe     @relation(fields: [cafeId], references: [id], onDelete: Cascade)
   cafeId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int
@@ -66,10 +69,24 @@ model CafePhoto {
 
 model Like {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  cafe      Cafe     @relation(fields: [cafeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cafe      Cafe     @relation(fields: [cafeId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  userId    Int
+  cafeId    Int
+
+  @@unique([cafeId, userId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  caption   String
+  rating    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cafe      Cafe     @relation(fields: [cafeId], references: [id], onDelete: Cascade)
   userId    Int
   cafeId    Int
 

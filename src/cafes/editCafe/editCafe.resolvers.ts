@@ -30,38 +30,44 @@ export const resolvers: Resolvers = {
               ok: false,
               error: 'Not found cafe',
             };
-          for (const id of deleteIds) {
-            try {
-              await client.cafePhoto.delete({ where: { id } });
-              // TODO : AWS S3 버킷에서도 삭제
-            } catch (error) {
-              console.error(error);
-              return {
-                ok: false,
-                error: "Can't Delete Photo",
-              };
+          if (deleteIds) {
+            for (const id of deleteIds) {
+              try {
+                await client.cafePhoto.delete({
+                  where: { id },
+                });
+                // TODO : AWS S3 버킷에서도 삭제
+              } catch (error) {
+                console.error(error);
+                return {
+                  ok: false,
+                  error: "Can't Delete Photo",
+                };
+              }
             }
           }
           let categoriesObjs: { name: string; slug: string }[] | null = null;
-          if (files?.length > 10)
-            return {
-              ok: false,
-              error: "Can't not upload files more than 10",
-            };
-          if (files?.length > 0) {
-            for (const file of files) {
-              const url = await uploadToS3Bucket(
-                file,
-                loggedInUser.id,
-                'photos'
-              );
-              await client.cafePhoto.create({
-                data: {
-                  cafeId: id,
-                  userId: loggedInUser.id,
-                  url,
-                },
-              });
+          if (files) {
+            if (files?.length > 10)
+              return {
+                ok: false,
+                error: "Can't not upload files more than 10",
+              };
+            if (files?.length > 0) {
+              for (const file of files) {
+                const url = await uploadToS3Bucket(
+                  file,
+                  loggedInUser.id,
+                  'photos'
+                );
+                await client.cafePhoto.create({
+                  data: {
+                    cafeId: id,
+                    userId: loggedInUser.id,
+                    url,
+                  },
+                });
+              }
             }
           }
           if (categories) {
