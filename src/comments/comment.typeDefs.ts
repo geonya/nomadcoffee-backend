@@ -5,7 +5,7 @@ export default gql`
     id: Int!
     updatedAt: String!
     createdAt: String!
-    caption: string!
+    caption: String!
     rating: Int!
     user: User
     cafe: Cafe
