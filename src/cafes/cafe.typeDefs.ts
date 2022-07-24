@@ -14,6 +14,7 @@ export default gql`
     isLiked: Boolean!
     countLikes: Int!
     totalRating: Float
+    comments: [Comment]
     updatedAt: String!
     createdAt: String!
   }
