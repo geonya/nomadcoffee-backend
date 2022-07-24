@@ -28,8 +28,9 @@ export const resolvers: Resolvers = {
           const existingComment = await client.comment.findUnique({
             where: commentWhere,
           });
+          let comment = null;
           if (existingComment) {
-            await client.comment.update({
+            comment = await client.comment.update({
               where: {
                 id: existingComment.id,
               },
@@ -39,7 +40,7 @@ export const resolvers: Resolvers = {
               },
             });
           } else {
-            await client.comment.create({
+            comment = await client.comment.create({
               data: {
                 caption,
                 rating,
@@ -58,6 +59,7 @@ export const resolvers: Resolvers = {
           }
           return {
             ok: true,
+            comment,
           };
         } catch (error) {
           console.error(error);
