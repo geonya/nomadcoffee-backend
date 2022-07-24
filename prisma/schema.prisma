@@ -53,7 +53,6 @@ model Cafe {
   updatedAt   DateTime    @updatedAt
   likes       Like[]
   comments    Comment[]
-  totalRating Float?
 }
 
 model CafePhoto {

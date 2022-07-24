@@ -13,7 +13,6 @@ export default gql`
     categories: [Category]
     isLiked: Boolean!
     countLikes: Int!
-    totalRating: Float
     comments: [Comment]
     updatedAt: String!
     createdAt: String!
